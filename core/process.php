@@ -6,7 +6,7 @@ include('secure/ips.php');
 
 $metodo_permitido = "POST";
 $archivo = "../logs/log.log";
-$dominio_autorizado = "localhost";
+$dominio_autorizado = "192.168.1.8";
 $ip = ip_in_ranges($_SERVER["REMOTE_ADDR"],$rango);
 $txt_usuario_autorizado = "admin";
 $txt_password_autorizado = "admin";
@@ -60,13 +60,14 @@ if(array_key_exists("HTTP_REFERER",$_SERVER)){
             header("Location: ../?status=3");
         }
     }else{
-        crear_editar_log($archivo, "HA INTENTADO SUPLANTAR UN REFERER QUE NO ESTÁ AUTORIZADO",2,$_SERVER["REMOTE_ADDR"],$_SERVER["HTTP_REFERER"],$SERVER["HTTP_USER_AGENT"]);
+        crear_editar_log($archivo, "a intentado suplantar UN REFERER QUE NO ESTA AUTORIZADO",2,$_SERVER["REMOTE_ADDR"],$_SERVER["HTTP_REFERER"],$SERVER["HTTP_USER_AGENT"]);
         header("HTTP/1.1 301 Moved Permanently");
         header("Location: ../?status=2");
     }
 }else {
-    crear_editar_log($archivo, "EL USUARIO HA INTENTADO INGRESAR AL SISTEMA DE UNA MANERA INCORRECTA",2,$_SERVER["REMOTE_ADDR"],$_SERVER["HTTP_REFERER"],$SERVER["HTTP_USER_AGENT"]);
+        crear_editar_log($archivo, "eL USUARIO HA INTENTADO INGRESAR AL SISTEMA UNA MANERA INCORRECTA",2,$_SERVER["REMOTE_ADDR"],$_SERVER["HTTP_REFERER"],$SERVER["HTTP_USER_AGENT"]);
         header("HTTP/1.1 301 Moved Permanently");
         header("Location: ../?status=1");
+    
 }
 ?>
